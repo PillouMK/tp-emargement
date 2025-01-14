@@ -1,26 +1,25 @@
 "use strict";
+
+import { DataTypes, QueryInterface } from "sequelize";
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Users", {
+  async up(queryInterface: QueryInterface, Sequelize: typeof DataTypes) {
+    await queryInterface.createTable("Sessions", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      title: {
         type: Sequelize.STRING,
       },
-      email: {
-        type: Sequelize.STRING,
-        unique: true,
+      date: {
+        type: Sequelize.DATE,
       },
-      role: {
-        type: Sequelize.STRING,
-      },
-      password: {
-        type: Sequelize.STRING,
+      formateur_id: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -32,7 +31,7 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Users");
+  async down(queryInterface: QueryInterface, Sequelize: typeof DataTypes) {
+    await queryInterface.dropTable("Sessions");
   },
 };

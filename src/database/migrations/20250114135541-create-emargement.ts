@@ -1,7 +1,10 @@
 "use strict";
+
+import { DataTypes, QueryInterface } from "sequelize";
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface: QueryInterface, Sequelize: typeof DataTypes) {
     await queryInterface.createTable("Emargements", {
       id: {
         allowNull: false,
@@ -11,21 +14,9 @@ module.exports = {
       },
       session_id: {
         type: Sequelize.INTEGER,
-        references: {
-          model: "Sessions",
-          key: "id",
-        },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL",
       },
       etudiant_id: {
         type: Sequelize.INTEGER,
-        references: {
-          model: "Users",
-          key: "id",
-        },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL",
       },
       status: {
         type: Sequelize.BOOLEAN,
@@ -40,7 +31,7 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface: QueryInterface, Sequelize: typeof DataTypes) {
     await queryInterface.dropTable("Emargements");
   },
 };
